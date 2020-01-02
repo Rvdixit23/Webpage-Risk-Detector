@@ -1,0 +1,7 @@
+{
+    "manifest_version": 2,
+    "name": "My Extension",
+    "version": "versionString",
+    "default_locale": "en",
+    "description": "Website Risk Detector"
+}
