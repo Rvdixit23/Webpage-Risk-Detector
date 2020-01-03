@@ -2,28 +2,8 @@
 var aBlackList = ["google", "amazon"];
 var imgBlackList = ["goog"];
 
-
-function riskToElement(riskPercent) {
-    // riskPercent : Percentage of risk finally calculated
-    // Returns : HTML Paragraph element with text containing risk level
-
-    riskFactor = document.createElement("p");
-    if (riskPercent < 30) {
-        riskFactor.id = "lowRisk";
-        riskFactor.class = "lowRisk";
-        riskFactor.innerText = "Low Risk"
-    } else if (riskPercent < 70) {
-        riskFactor.id = "moderateRisk";
-        riskFactor.class = "moderateRisk";
-        riskFactor.innerText = "Moderate Risk"
-    } else {
-        riskFactor.id = "highRisk";
-        riskFactor.class = "highRisk";
-        riskFactor.innerText = "High Risk"
-    }
-
-    return riskFactor;
-}
+// var aBlackList = ['&ad.vid=$~xmlhttprequest', '&ad_block=', '&ad_box_', '&ad_channel=', '&ad_classid=', '&ad_code=', '&ad_height=', '&ad_ids=', '&ad_keyword=', '&ad_network_', '&ad_number=', '&ad_revenue=', '&ad_slot=', '&ad_sub=', '&ad_time=', '&ad_type=', '&ad_type_', '&ad_url=', '&ad_zones=', '&adbannerid=', '&adclient=', '&adcount=', '&adflag=', '&adgroupid=', '&adlist=', '&admeld_', '&admid=$~subdocument', '&adname=', '&adnet=', '&adnum=', '&adpageurl=', '&Ads_DFP=', '&adsafe=', '&adserv=', '&adserver=', '&adsize=', '&adslot=', '&adslots=', '&adsourceid=', '&adspace=', '&adsrc=', '&adstrade=', '&adstype=', '&AdType=', '&adunit=', '&adurl=', '&adv_keywords=', '&advert_', '&advertiserid=$domain=~bee.gl|~cpashka.ru', '&advid=$~image', '&advtile=', '&adzone=', '&banner_id=', '&bannerid=', '&clicktag=http', '&customSizeAd=', '&displayads=', '&expandable_ad_', '&forceadv=', '&gerf=*&guro=', '&gIncludeExternalAds=', '&googleadword=', '&img2_adv=', '&jumpstartadformat=', '&largead=', '&maxads=', '&pltype=adhost^', '&popunder=', '&program=revshare&', '&prvtof=*&poru=', '&show_ad_', '&showad=', '&simple_ad_', '&smallad=', '&smart_ad_', '&strategy=adsense&', '&type=ad&', '&UrlAdParam=', '&video_ads_', '&videoadid='];
+// var imgBlackList = ['&ad.vid=$~xmlhttprequest', '&ad_block=', '&ad_box_', '&ad_channel=', '&ad_classid=', '&ad_code=', '&ad_height=', '&ad_ids=', '&ad_keyword=', '&ad_network_', '&ad_number=', '&ad_revenue=', '&ad_slot=', '&ad_sub=', '&ad_time=', '&ad_type=', '&ad_type_', '&ad_url=', '&ad_zones=', '&adbannerid=', '&adclient=', '&adcount=', '&adflag=', '&adgroupid=', '&adlist=', '&admeld_', '&admid=$~subdocument', '&adname=', '&adnet=', '&adnum=', '&adpageurl=', '&Ads_DFP=', '&adsafe=', '&adserv=', '&adserver=', '&adsize=', '&adslot=', '&adslots=', '&adsourceid=', '&adspace=', '&adsrc=', '&adstrade=', '&adstype=', '&AdType=', '&adunit=', '&adurl=', '&adv_keywords=', '&advert_', '&advertiserid=$domain=~bee.gl|~cpashka.ru', '&advid=$~image', '&advtile=', '&adzone=', '&banner_id=', '&bannerid=', '&clicktag=http', '&customSizeAd=', '&displayads=', '&expandable_ad_', '&forceadv=', '&gerf=*&guro=', '&gIncludeExternalAds=', '&googleadword=', '&img2_adv=', '&jumpstartadformat=', '&largead=', '&maxads=', '&pltype=adhost^', '&popunder=', '&program=revshare&', '&prvtof=*&poru=', '&show_ad_', '&showad=', '&simple_ad_', '&smallad=', '&smart_ad_', '&strategy=adsense&', '&type=ad&', '&UrlAdParam=', '&video_ads_', '&videoadid='];
 
 function finalRiskPercentage(aLength, aAdCount, imgLength, imgAdCount) {
     // Weighted average of the image black list and anchor black list
@@ -33,6 +13,29 @@ function finalRiskPercentage(aLength, aAdCount, imgLength, imgAdCount) {
     imgFrac = imgLength / totalAds;
     finalPercent = aFrac * aAdCount + imgFrac * imgAdCount;
     return finalPercent;
+}
+
+function riskToElement(riskPercent) {
+    // riskPercent : Percentage of risk finally calculated
+    // Returns : HTML Paragraph element with text containing risk level
+
+    riskFactor = document.createElement("p");
+    if (riskPercent < 30) {
+        riskFactor.id = "lowRisk";
+        riskFactor.class = "lowRisk";
+        riskFactor.innerText = "Low"
+    } else if (riskPercent < 70) {
+        riskFactor.id = "moderateRisk";
+        riskFactor.class = "moderateRisk";
+        riskFactor.innerText = "Moderate"
+    } else {
+        riskFactor.id = "highRisk";
+        riskFactor.class = "highRisk";
+        riskFactor.innerText = "High"
+    }
+
+    return riskFactor;
+
 }
 
 
@@ -83,11 +86,17 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
             }
         }
 
+
         // Calculating final result percentage
+        finalPercent = finalRiskPercentage(anchors.length, anchorAdCount, images.length, imgAdCount);
 
         // Calculation result Testing
         console.log("Anchor Ad Count : ", anchorAdCount);
         console.log("Image Ad count : ", imgAdCount);
+        console.log("Weighted Risk Percent : ", finalPercent);
+
+        // Creating risk remark HTML element
+        riskRemark = riskToElement(finalPercent);
 
         // Creating the heading of the page
         heading = document.createElement("h1");
@@ -97,18 +106,23 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         // Creating Pretext for Anchor tag data
         riskLine = document.createElement("h2");
         riskLine.class = "riskText";
-        riskLine.innerText = "Percentage of redirects to Google owned pages: ";
+        riskLine.innerText = "Percentage of risk from Redirects";
 
         // Creating Pretext for Image tag data
         imgPretext = document.createElement("h2");
         imgPretext.class = "riskText";
-        imgPretext.innerText = "Images from Google : ";
+        imgPretext.innerText = "Percentage of risk from Images : ";
 
         // Creating element for image data
         imgText = document.createElement("div");
         imgText.id = "imgMessage";
         imgText.innerHTML = ((imgAdCount / images.length) * 100).toString() + "%";
 
+        // Overall Risk element
+        overall = document.createElement("p");
+        overall.id = "overallRiskText";
+        overall.class = "riskText";
+        overall.innerText = "Overall Risk : "
 
 
         // Inserting all the elements into the DOM of the popup
@@ -118,6 +132,8 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         document.body.insertBefore(riskLine, message);
         document.body.appendChild(imgPretext);
         document.body.appendChild(imgText);
+        document.body.appendChild(overall);
+        document.body.appendChild(riskRemark);
 
 
     }
