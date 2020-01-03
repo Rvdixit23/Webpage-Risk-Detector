@@ -15,7 +15,27 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
         var doc = new DOMParser().parseFromString(src, "text/html");
         anchors = doc.getElementsByTagName("a");
-        message.innerText = anchors.length
+        message.innerText = anchors.length;
+
+        //Finding page title
+        //Creating h1 element with class "title" and text
+        title = doc.title;
+        heading = document.createElement("h1");
+        heading.class = "title";
+        heading.innerText = "Source Webpage : " + title;
+
+        //Percentage risk tag
+        riskLine = document.createElement("p");
+        riskLine.class = "riskText";
+        riskLine.innerText = "Risk Percentage : ";
+
+
+
+        document.body.insertBefore(heading, message)
+        document.body.insertBefore(document.createElement('br'), message)
+        document.body.insertBefore(riskLine, message);
+
+
         console.log(anchors);
 
 
