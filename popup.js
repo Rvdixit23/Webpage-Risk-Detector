@@ -130,7 +130,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
 
         // Inserting all the elements into the DOM of the popup
-        message.innerText = ((anchorAdCount / anchors.length) * 100).toString() + "%";
+        message.innerText = parseInt(((anchorAdCount / anchors.length) * 100)).toString() + "%";
         document.body.insertBefore(heading, message)
         document.body.insertBefore(document.createElement('br'), message)
         document.body.insertBefore(riskLine, message);
