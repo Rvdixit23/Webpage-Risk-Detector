@@ -119,8 +119,8 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         imgText = document.createElement("div");
         imgText.id = "imgMessage";
         imgText.class = "progress-bar progress-bar-striped progress-bar-animated";
-        imgText.innerHTML = Math.floor(((imgAdCount / images.length) * 100)).toString() + "%";
-
+        var res = Math.floor(((imgAdCount / images.length) * 100)).toString() + "%";
+        imgText.innerHTML = res;//image %
         // Overall Risk element
         overall = document.createElement("p");
         overall.id = "overallRiskText";
@@ -130,7 +130,8 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
 
         // Inserting all the elements into the DOM of the popup
-        message.innerText = parseInt(((anchorAdCount / anchors.length) * 100)).toString() + "%";
+        var res2 = parseInt(((anchorAdCount / anchors.length) * 100)).toString() + "%";
+        message.innerText = res2;//redirect %
         document.body.insertBefore(heading, message)
         document.body.insertBefore(document.createElement('br'), message)
         document.body.insertBefore(riskLine, message);
@@ -141,8 +142,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
 
     }
-
-
+    
 });
 
 function onWindowLoad() {

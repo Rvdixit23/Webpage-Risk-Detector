@@ -58,29 +58,15 @@
         }
     </style>
     <script src='popup.js'></script>
-    <script>
-        
-       function move() {
-  var elem = document.getElementById("imgMessage");   
-  var width = 20;
-  var id = setInterval(frame, 10);
-  function frame() {
-    if (width >= 100) {
-      clearInterval(id);
-    } else {
-      width++; 
-      elem.style.width = width + '%'; 
-      elem.innerHTML = width * 1  + '%';
-    }
-  }
-}
-</script>
-    </script>
+   
+    
 </head>
 
 <body style="width:400px;font-family: 'Noto Sans JP', sans-serif;">
 
     <div id='message'>Loading Source....</div>
+
+    
 </body>
 
 </html>
