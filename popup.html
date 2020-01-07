@@ -2,10 +2,83 @@
 <html>
 
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        #title{
+            
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-left: 20px;
+            
+        }
+        #lowRisk{
+            font-size: 50px;
+            color: rgb(44, 250, 44);
+            font-family: 'Noto Sans JP', sans-serif;
+            text-align: center;
+        }
+        #highRisk{
+            font-size: 50px;
+            color: red;
+            text-align: center;
+        }
+        #moderateRisk{
+            font-size: 50px;
+            color: orange;
+            text-align: center;
+        }
+        #riskText{
+            padding-bottom: 10px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-left: 20px;
+           
+        }
+        #imgMessage{
+           
+            width: 60px;
+            height: 60px;
+            margin-left: 170px;
+            
+            align-items: center;
+            justify-content: center;
+            
+        }
+        #message{
+            padding: 16px;
+            margin-left: 150px;
+            width: 500%;
+        }
+    </style>
     <script src='popup.js'></script>
+    <script>
+        
+       function move() {
+  var elem = document.getElementById("imgMessage");   
+  var width = 20;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width >= 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+}
+</script>
+    </script>
 </head>
 
-<body style="width:400px;">
+<body style="width:400px;font-family: 'Noto Sans JP', sans-serif;">
 
     <div id='message'>Loading Source....</div>
 </body>

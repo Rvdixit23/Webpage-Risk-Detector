@@ -19,7 +19,7 @@ function riskToElement(riskPercent) {
     // riskPercent : Percentage of risk finally calculated
     // Returns : HTML Paragraph element with text containing risk level
 
-    riskFactor = document.createElement("p");
+    riskFactor = document.createElement("div");
     if (riskPercent < 30) {
         riskFactor.id = "lowRisk";
         riskFactor.class = "lowRisk";
@@ -100,28 +100,32 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
         // Creating the heading of the page
         heading = document.createElement("h1");
-        heading.class = "title";
+        heading.id = "title";
         heading.innerText = "Source Webpage : " + doc.title;
 
         // Creating Pretext for Anchor tag data
-        riskLine = document.createElement("h2");
+        riskLine = document.createElement("div");
         riskLine.class = "riskText";
-        riskLine.innerText = "Percentage of risk from Redirects";
+        riskLine.id = "riskText";
+        riskLine.innerText = "Percentage of risk from Redirects : ";
 
         // Creating Pretext for Image tag data
-        imgPretext = document.createElement("h2");
+        imgPretext = document.createElement("div");
         imgPretext.class = "riskText";
+        imgPretext.id = "riskText";
         imgPretext.innerText = "Percentage of risk from Images : ";
 
         // Creating element for image data
         imgText = document.createElement("div");
         imgText.id = "imgMessage";
-        imgText.innerHTML = ((imgAdCount / images.length) * 100).toString() + "%";
+        imgText.class = "progress-bar progress-bar-striped progress-bar-animated";
+        imgText.innerHTML = Math.floor(((imgAdCount / images.length) * 100)).toString() + "%";
 
         // Overall Risk element
         overall = document.createElement("p");
         overall.id = "overallRiskText";
         overall.class = "riskText";
+        overall.id = "riskText";
         overall.innerText = "Overall Risk : "
 
 
