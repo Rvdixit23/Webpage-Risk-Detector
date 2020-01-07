@@ -120,7 +120,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         imgText.id = "imgMessage";
         imgText.class = "progress-bar progress-bar-striped progress-bar-animated";
         var res = Math.floor(((imgAdCount / images.length) * 100)).toString() + "%";
-        imgText.innerHTML = res;//image %
+        imgText.innerHTML = res; //image %
         // Overall Risk element
         overall = document.createElement("p");
         overall.id = "overallRiskText";
@@ -129,20 +129,37 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         overall.innerText = "Overall Risk : "
 
 
-        // Inserting all the elements into the DOM of the popup
-        var res2 = parseInt(((anchorAdCount / anchors.length) * 100)).toString() + "%";
-        message.innerText = res2;//redirect %
-        document.body.insertBefore(heading, message)
-        document.body.insertBefore(document.createElement('br'), message)
-        document.body.insertBefore(riskLine, message);
-        document.body.appendChild(imgPretext);
-        document.body.appendChild(imgText);
-        document.body.appendChild(overall);
-        document.body.appendChild(riskRemark);
+
+        function addElements() {
+            // Inserting all the elements into the DOM of the popup
+            button = document.getElementById("button");
+            document.body.removeChild(button);
+            var res2 = parseInt(((anchorAdCount / anchors.length) * 100)).toString() + "%";
+            message.innerText = res2; //redirect %
+            document.body.insertBefore(heading, message)
+            document.body.insertBefore(document.createElement('br'), message)
+            document.body.insertBefore(riskLine, message);
+            document.body.appendChild(imgPretext);
+            document.body.appendChild(imgText);
+            document.body.appendChild(overall);
+            document.body.appendChild(riskRemark);
+        }
+
+        button = document.createElement("button");
+        button.id = "button";
+        button.class = "btn btn-danger"
+        button.innerText = "Calculate Risk";
+        button.style.backgroundColor = "red";
+        button.style.color = "white";
+        button.style.outline = "none";
+        button.style.weight = "bold";
+        button.style.borderRadius = "15%";
+        button.onclick = addElements;
+        document.body.appendChild(button)
 
 
     }
-    
+
 });
 
 function onWindowLoad() {
@@ -161,6 +178,18 @@ function onWindowLoad() {
 
 }
 
+// function getRisk() {
+//     onWindowLoad();
+// }
+
+
+// var src = "";
+// button = document.getElementById("calcButton")
+// button.onclick = function getRisk() {
+//     // window.onload = onWindowLoad;
+//     onWindowLoad();
+// }
+// console.log(src);
 
 var src = "";
 window.onload = onWindowLoad;
