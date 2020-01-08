@@ -101,7 +101,7 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         // Creating the heading of the page
         heading = document.createElement("h1");
         heading.id = "title";
-        heading.innerText = "Source Webpage : " + doc.title;
+        heading.innerText = "Current Webpage : " + doc.title;
 
         // Creating Pretext for Anchor tag data
         riskLine = document.createElement("div");
@@ -133,6 +133,10 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         function addElements() {
             // Inserting all the elements into the DOM of the popup
             button = document.getElementById("button");
+            creator = document.getElementById("creators");
+            header = document.getElementById("head");
+            document.body.removeChild(creator);
+            document.body.removeChild(head);
             document.body.removeChild(button);
             var res2 = parseInt(((anchorAdCount / anchors.length) * 100)).toString() + "%";
             message.innerText = res2; //redirect %
@@ -149,11 +153,8 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         button.id = "button";
         button.class = "btn btn-danger"
         button.innerText = "Calculate Risk";
-        button.style.backgroundColor = "red";
-        button.style.color = "white";
-        button.style.outline = "none";
-        button.style.weight = "bold";
-        button.style.borderRadius = "15%";
+        
+        
         button.onclick = addElements;
         document.body.appendChild(button)
 

@@ -3,7 +3,7 @@
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Gelasio&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -13,7 +13,7 @@
             font-size: 30px;
             font-weight: bold;
             margin-top: 10px;
-            margin-left: 20px;
+            margin-left: 17px;
         }
         
         #lowRisk {
@@ -46,15 +46,53 @@
         #imgMessage {
             width: 60px;
             height: 60px;
-            margin-left: 170px;
+            margin-left: 150px;
             align-items: center;
             justify-content: center;
+            font-size: 30px;
         }
         
         #message {
             padding: 16px;
             margin-left: 150px;
             width: 500%;
+            font-size: 30px;
+        }
+        #button{
+            border-radius: 4px;
+            background: linear-gradient(to right, #54acc2, #2ebd69) !important;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 14px;
+             padding: 20px;
+            width: 180px;
+            transition: all 0.4s;
+            cursor: pointer;
+            margin-left: 96px;
+            margin-bottom: 10px;
+        }
+       
+        #button:hover{
+            background: #434343;
+            letter-spacing: 1px;
+            -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+            box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+            transition: all 0.4s ease 0s;
+            padding-right: 25px;
+        }
+        body{
+            border: 7px solid ghostwhite;
+           
+        }
+        #creators{
+            margin-left: 90px;
+        }
+        #head{
+            margin-left: 38px;
+            margin-top: 20px;;
         }
     </style>
     <script src='popup.js'></script>
@@ -62,10 +100,10 @@
 
 </head>
 
-<body style="width:400px;font-family: 'Noto Sans JP', sans-serif;">
-
-    <div id='message'>Loading Source....</div>
-
+<body style="width:400px;font-family: 'Gelasio', serif;">
+    <h2 id="head">TryLink Risk Detector</h2>
+    <div id='message'></div>
+    <small id="creators">Creators: Varun KJ & Vishnu Dixit</small>
 </body>
 
 </html>
